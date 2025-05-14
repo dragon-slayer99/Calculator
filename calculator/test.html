@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Calculator Tests</title>
+    <style>
+        .test-result {
+            margin: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .pass {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+
+        .fail {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Calculator Tests</h1>
+    <div id="test-results"></div>
+
+    <!-- Include the original calculator code -->
+    <div id="main-container" style="display: none;">
+        <div id="display">0</div>
+    </div>
+    <script src="script.js"></script>
+
+    <!-- Test Runner -->
+    <script>
+        function expect(actual) {
+            return {
+                toBe: function (expected) {
+                    if (actual === expected) {
+                        return true;
+                    }
+                    throw new Error(`Expected ${expected} but got ${actual}`);
+                }
+            };
+        }
+
+        function runTests() {
+            const tests = [
+                {
+                    name: 'Initial display should show 0',
+                    test: function () {
+                        clearDisplay();
+                        expect(document.getElementById('display').textContent).toBe('0');
+                    }
+                },
+                {
+                    name: 'Appending numbers should work correctly',
+                    test: function () {
+                        clearDisplay();
+                        appendNumber('1');
+                        appendNumber('2');
+                        appendNumber('3');
+                        expect(document.getElementById('display').textContent).toBe('123');
+                    }
+                },
+                {
+                    name: 'Basic addition should work',
+                    test: function () {
+                        clearDisplay();
+                        appendNumber('5');
+                        appendOperator('+');
+                        appendNumber('3');
+                        calculate();
+                        expect(document.getElementById('display').textContent).toBe('8');
+                    }
+                },
+                {
+                    name: 'Basic subtraction should work',
+                    test: function () {
+                        clearDisplay();
+                        appendNumber('8');
+                        appendOperator('-');
+                        appendNumber('3');
+                        calculate();
+                        expect(document.getElementById('display').textContent).toBe('5');
+                    }
+                },
+                {
+                    name: 'Basic multiplication should work',
+                    test: function () {
+                        clearDisplay();
+                        appendNumber('4');
+                        appendOperator('*');
+                        appendNumber('3');
+                        calculate();
+                        expect(document.getElementById('display').textContent).toBe('12');
+                    }
+                },
+                {
+                    name: 'Decimal numbers should work',
+                    test: function () {
+                        clearDisplay();
+                        appendNumber('3');
+                        appendDecimal();
+                        appendNumber('5');
+                        expect(document.getElementById('display').textContent).toBe('3.5');
+                    }
+                },
+                {
+                    name: 'Multiple decimals should not be allowed',
+                    test: function () {
+                        clearDisplay();
+                        appendNumber('3');
+                        appendDecimal();
+                        appendNumber('5');
+                        appendDecimal();
+                        expect(document.getElementById('display').textContent).toBe('3.5');
+                    }
+                },
+                {
+                    name: 'Delete button should remove last digit',
+                    test: function () {
+                        clearDisplay();
+                        appendNumber('1');
+                        appendNumber('2');
+                        appendNumber('3');
+                        deleteNumber();
+                        expect(document.getElementById('display').textContent).toBe('12');
+                    }
+                }
+            ];
+
+            const resultsDiv = document.getElementById('test-results');
+            let passCount = 0;
+            let failCount = 0;
+
+            tests.forEach(function (testCase) {
+                try {
+                    testCase.test();
+                    passCount++;
+                    resultsDiv.innerHTML += `
+                        <div class="test-result pass">
+                            ✓ ${testCase.name}
+                        </div>
+                    `;
+                } catch (error) {
+                    failCount++;
+                    resultsDiv.innerHTML += `
+                        <div class="test-result fail">
+                            ✗ ${testCase.name}<br>
+                            Error: ${error.message}
+                        </div>
+                    `;
+                }
+            });
+
+            resultsDiv.innerHTML = `
+                <h2>Results: ${passCount} passed, ${failCount} failed</h2>
+                ${resultsDiv.innerHTML}
+            `;
+        }
+
+        // Run tests when page loads
+        window.onload = runTests;
+    </script>
+</body>
+
+</html>

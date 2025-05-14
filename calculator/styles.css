@@ -1,0 +1,91 @@
+body{
+    margin: 0px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#main-container{
+    min-width: 340px;
+    max-width: 340px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px;
+    background-color: black;
+    border-radius: 20px;
+}
+#numPad{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
+}
+
+#display{
+    width: 100%;
+    text-align: right;
+    background-color: hsl(0, 0%, 90%);
+    margin-bottom: 20px;
+    font-size: 3.5rem;
+    line-height: 70px;
+    border-radius: 15px;
+    overflow-y: hidden;
+    overflow-x: auto;
+}
+
+#display::-webkit-scrollbar {
+    height: 4px;
+}
+
+#display::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+#display::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+button{
+    background-color: aqua;
+    width: 70px;
+    height: 70px;
+    border-radius: 30%;
+    border: none;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    font-size: 2.1rem;
+    margin-top: 10px;
+    margin-left: 0px;
+    margin-right: 0px;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: hsl(251, 89%, 58%);
+    color: aqua;
+    transition: all 0.3s ease;
+
+}
+
+button:active{
+    background-color: white;
+    color: black;
+}
+
+.noNum{
+    background-color: orange;
+}
+.noNum:hover{
+    background-color: rgb(245, 213, 153);
+    color: black;
+}
+.noNum:active{
+    background-color: rgb(255, 255, 255);
+    color: black;
+}
+
+.delbtn{
+    background-color: chartreuse;
+}
