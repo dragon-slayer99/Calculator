@@ -5,6 +5,7 @@ body{
     justify-content: center;
     align-items: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
 }
 
 #main-container{
@@ -14,7 +15,7 @@ body{
     justify-content: center;
     flex-direction: column;
     padding: 20px;
-    background-color: black;
+    background-color: white;
     border-radius: 20px;
 }
 #numPad{
@@ -26,7 +27,9 @@ body{
 #display{
     width: 100%;
     text-align: right;
-    background-color: hsl(0, 0%, 90%);
+    background-color: black;
+    color: white;
+    letter-spacing: 1px;
     margin-bottom: 20px;
     font-size: 3.5rem;
     line-height: 70px;

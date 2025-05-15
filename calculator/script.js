@@ -78,6 +78,7 @@ function deleteNumber() {
 }
 
 function calculate(){
+    displayValue = displayValue.replace(/×/g, '*').replace(/÷/g, '/');
     displayValue = eval(displayValue);
     updateDisplay();
 }
